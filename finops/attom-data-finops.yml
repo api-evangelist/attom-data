@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ATTOM
+providerId: attom-data
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Property Data
+- Real Estate
+- Valuation
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of ATTOM API spend. ATTOM sells the API as a subscription rather
+  than pure pay-as-you-go: cost is driven by the datasets/endpoints licensed and
+  the committed monthly call volume, with a per-minute call ceiling and a
+  monthly call allowance per plan. A 30-day free trial precedes any paid
+  commitment. The dominant cost levers are which resource families you license
+  (property, assessment, AVM, sales/deed, mortgage, area, school, community,
+  POI, transportation noise, home equity), your monthly call volume against the
+  plan allowance, geographic coverage, and delivery method (API vs. bulk/data
+  warehouse). Overage and coverage expansion typically require renegotiation.
+notes: >-
+  ATTOM does not publish per-call list rates for the API, so unit economics must
+  be reconciled with an ATTOM quote. Model spend as a committed subscription
+  plus potential overage rather than metered per-call billing.
+sources:
+- https://www.attomdata.com/solutions/property-data-api/
+- https://www.attomdata.com/solutions/property-data-api/faqs/
+- https://api.developer.attomdata.com/home
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: ATTOM Data Solutions
+serviceCategory: Data and Analytics
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: ATTOM API
+  ServiceCategory: Data and Analytics
+  ProviderName: ATTOM Data Solutions
+  PublisherName: ATTOM Data Solutions
+  InvoiceIssuerName: ATTOM Data Solutions
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: api_calls
+  description: API calls made against licensed endpoints, counted against the monthly plan allowance.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - endpoint
+  - month
+- name: licensed_datasets
+  description: The resource families / endpoints licensed under the subscription (property, assessment, AVM, sales, mortgage, area, school, community, POI, etc.).
+  unit: datasets
+  aggregation: max
+  dimensions:
+  - account
+- name: coverage
+  description: Geographic coverage licensed (national vs. regional), a subscription cost lever.
+  unit: regions
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track monthly API call volume per endpoint against the plan allowance and watch for approaches to the per-minute ceiling.
+- name: Allocation
+  description: Attribute calls to products/teams by API key and endpoint so property-data spend maps to internal cost centers.
+- name: Optimization
+  description: License only the resource families you use; prefer consolidated packages (expandedprofile, allevents, detailmortgageowner) over multiple single-purpose calls; cache stable property attributes to avoid repeat calls.
+- name: Accountability
+  description: Assign an owner for the ATTOM subscription; review monthly call usage against the allowance and renegotiate volume/coverage before overage accrues.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

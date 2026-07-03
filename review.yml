@@ -1,0 +1,128 @@
+aid: attom-data
+name: ATTOM
+review:
+  question: Does ATTOM expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. ATTOM's entire public API surface is
+    request/response REST over HTTPS through the api.gateway.attomdata.com
+    gateway. There is no server-push transport (WebSocket or SSE) on ATTOM's
+    API to model. Bulk / high-volume needs are met with batch data delivery
+    and data-warehouse feeds, not a streaming socket, so there is nothing for
+    an AsyncAPI document to describe.
+findings:
+  summary: |
+    ATTOM Data Solutions does not publish a documented public WebSocket API.
+    ATTOM is a property, real estate, and location data provider. Its API
+    (marketed as ATTOM Cloud / the ATTOM API) is a family of REST resources
+    served from the gateway host https://api.gateway.attomdata.com. Classic
+    Property API endpoints use the URI pattern
+    /propertyapi/v1.0.0/{resource}/{package}?{query}; version 4 endpoints drop
+    the component name and use /v4/{resource}; area geography endpoints use
+    /areaapi/v2.0.0/. Every request is authenticated with an API key sent in
+    the `apikey` header and returns JSON (or XML). All calls are synchronous
+    request/response GETs. No realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint is documented anywhere in ATTOM's developer
+    documentation as of the review date.
+  openSource: |
+    ATTOM's API and underlying data warehouse are commercial and proprietary;
+    there is no open-source server component. Access requires an ATTOM API key
+    (30-day free trial, then a paid subscription). Client SDK examples in
+    Python, PHP, Ruby, and JavaScript are provided in ATTOM's developer docs,
+    but the platform itself is not open source.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.gateway.attomdata.com
+      documented: true
+      note: All ATTOM API endpoints (propertyapi/v1.0.0, v4, areaapi/v2.0.0) are REST GETs authenticated with the apikey header.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in ATTOM's API documentation as of the review date.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No outbound webhook / callback mechanism is documented for the ATTOM API; it is pull-only request/response.
+  endpointsConfirmedRest:
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/id
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/basicprofile
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/expandedprofile
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/snapshot
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailowner
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgage
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgageowner
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailwithschools
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/buildingpermits
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/snapshot
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessmenthistory/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/snapshot
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/avmhistory/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/valuation/rentalavm
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/valuation/homeequity
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/snapshot
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/basichistory
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/expandedhistory
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/transaction/salestrend
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/search
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/profile
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/district
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/allevents/detail
+    - GET https://api.gateway.attomdata.com/propertyapi/v1.0.0/allevents/snapshot
+    - GET https://api.gateway.attomdata.com/v4/neighborhood/community
+  endpointsModeledRest:
+    - GET https://api.gateway.attomdata.com/areaapi/v2.0.0/geography/lookup
+    - GET https://api.gateway.attomdata.com/areaapi/v2.0.0/hierarchy/lookup
+    - GET https://api.gateway.attomdata.com/areaapi/v2.0.0/boundary/detail
+    - GET https://api.gateway.attomdata.com/v4/neighborhood/poi
+    - GET https://api.gateway.attomdata.com/v4/neighborhood/poi/category/lookup
+    - GET https://api.gateway.attomdata.com/transportationnoise
+  modeledNote: |
+    The Area/Boundary, POI, and Transportation Noise endpoint paths are modeled
+    from ATTOM's documented resource groups (Area API v2/v4 with a new GeoJSON
+    boundary endpoint, POI API v4 search + category lookup, and a
+    transportation-noise resource). ATTOM confirms these resource families exist
+    and are versioned to v4, but does not publish the exact path strings in the
+    public help articles reviewed; only /v4/neighborhood/community is shown as a
+    literal v4 example. Confirm the exact paths and query parameters against the
+    live interactive docs at api.developer.attomdata.com/docs before production
+    use.
+sources:
+  - url: https://api.developer.attomdata.com/docs
+    type: APIReference
+    note: Interactive API documentation; property/assessment/avm/sale/school/allevents resources, apikey header auth.
+  - url: https://api.developer.attomdata.com/documentation
+    type: Documentation
+    note: Code examples (Python, PHP, Ruby, JavaScript); confirms apikey header and Accept header, base gateway host.
+  - url: https://cloud-help.attomdata.com/article/598-endpoints
+    type: Documentation
+    note: Endpoint reference; base URL https://api.gateway.attomdata.com and the {API-URL}/{API-Version}/{Endpoint}/{Route} pattern.
+  - url: https://cloud-help.attomdata.com/article/612-attom-api-v4
+    type: Documentation
+    note: ATTOM API V4 - Area (boundary/geoId/hierarchy/location lookups), Community, POI, and Property v4 resource groups and geoIdV4 requirement.
+  - url: https://cloud-help.attomdata.com/article/641-upgrading-to-poi-endpoint-v4
+    type: Documentation
+    note: POI endpoint v4 upgrade (POI search + category lookup).
+  - url: https://www.attomdata.com/solutions/property-data-api/faqs/
+    type: Documentation
+    note: 30-day free trial, 200 calls/minute limit, per-plan monthly call allowance, custom pricing via sales.
+  - url: https://cloud-help.attomdata.com/article/631-api-usage-reset
+    type: Documentation
+    note: Monthly API usage / allowance reset behavior.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. ATTOM's public API is entirely
+    synchronous request/response REST over HTTPS, authenticated with an apikey
+    header. No AsyncAPI document was created because there is no server-push or
+    streaming transport on ATTOM's API to model.

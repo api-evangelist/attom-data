@@ -1,0 +1,414 @@
+{
+  "info": {
+    "name": "ATTOM API",
+    "description": "REST access to ATTOM Data Solutions' national property, real estate, and location data (158M+ U.S. properties). Base gateway: https://api.gateway.attomdata.com. Classic Property API endpoints live under /propertyapi/v1.0.0; v4 endpoints (community, POI) under /v4; area geographies under /areaapi/v2.0.0. Every request requires an API key in the 'apikey' header plus 'Accept: application/json'. Property/assessment/avm/sale/school/allevents endpoints are grounded in ATTOM's published endpoint reference; area, community, POI, and transportation-noise operations are modeled from ATTOM's documented resource groups.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "apikey", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.gateway.attomdata.com", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Property",
+      "item": [
+        {
+          "name": "Property ID lookup",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/id?address1=4529 Winona Court&address2=Denver, CO", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "id"], "query": [{ "key": "address1", "value": "4529 Winona Court" }, { "key": "address2", "value": "Denver, CO" }] },
+            "description": "Returns the ATTOM-assigned property ID and minimal identity fields for matching properties."
+          }
+        },
+        {
+          "name": "Property basic profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/basicprofile?address=4529 Winona Court, Denver, CO", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "basicprofile"], "query": [{ "key": "address", "value": "4529 Winona Court, Denver, CO" }] },
+            "description": "Essential property profile - address, location, lot, and building basics - for a specific address or APN/FIPS."
+          }
+        },
+        {
+          "name": "Property detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Comprehensive property characteristics for a property or list of properties."
+          }
+        },
+        {
+          "name": "Property expanded profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/expandedprofile?address1=4529 Winona Court&address2=Denver, CO", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "expandedprofile"], "query": [{ "key": "address1", "value": "4529 Winona Court" }, { "key": "address2", "value": "Denver, CO" }] },
+            "description": "Extended property profile combining characteristics, most-recent sale, assessment, and AVM in one call."
+          }
+        },
+        {
+          "name": "Property address radius search",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/address?latitude=39.780062&longitude=-105.043284&radius=1", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "address"], "query": [{ "key": "latitude", "value": "39.780062" }, { "key": "longitude", "value": "-105.043284" }, { "key": "radius", "value": "1" }] },
+            "description": "Radius search returning all properties within a given radius (miles) of coordinates."
+          }
+        },
+        {
+          "name": "Property snapshot",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/snapshot?postalcode=80212", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "snapshot"], "query": [{ "key": "postalcode", "value": "80212" }] },
+            "description": "Returns properties in an area matching characteristic filters such as beds, baths, size, value, and lot size."
+          }
+        },
+        {
+          "name": "Property detail with owner",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/detailowner?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "detailowner"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Property characteristics plus current owner names and mailing information."
+          }
+        },
+        {
+          "name": "Property building permits",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/buildingpermits?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "buildingpermits"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Building permit records for a property."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assessment",
+      "item": [
+        {
+          "name": "Assessment detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/assessment/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "assessment", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "County assessment data - assessed and market values, tax amounts, and exemptions - for a property."
+          }
+        },
+        {
+          "name": "Assessment snapshot",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/assessment/snapshot?postalcode=80212", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "assessment", "snapshot"], "query": [{ "key": "postalcode", "value": "80212" }] },
+            "description": "Assessment summary for properties in an area matching value or characteristic filters."
+          }
+        },
+        {
+          "name": "Assessment history detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/assessmenthistory/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "assessmenthistory", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Historical assessment records for a property."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Valuation (AVM)",
+      "item": [
+        {
+          "name": "ATTOM AVM detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/attomavm/detail?address1=4529 Winona Court&address2=Denver, CO", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "attomavm", "detail"], "query": [{ "key": "address1", "value": "4529 Winona Court" }, { "key": "address2", "value": "Denver, CO" }] },
+            "description": "Detailed AVM calculation for a property - estimated value, confidence score, and high/low value range."
+          }
+        },
+        {
+          "name": "AVM snapshot",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/avm/snapshot?postalcode=80212", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "avm", "snapshot"], "query": [{ "key": "postalcode", "value": "80212" }] },
+            "description": "Automated Valuation Model summary for properties in an area."
+          }
+        },
+        {
+          "name": "AVM history detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/avmhistory/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "avmhistory", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Historical AVM values for a property over time."
+          }
+        },
+        {
+          "name": "Rental AVM",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/valuation/rentalavm?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "valuation", "rentalavm"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Estimated market rent (rental AVM) for a property, with a value range."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Home Equity",
+      "item": [
+        {
+          "name": "Home equity",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/valuation/homeequity?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "valuation", "homeequity"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Estimated home equity for a property, combining the AVM value with outstanding mortgage balances to return an equity position and loan-to-value indication."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales & Deed",
+      "item": [
+        {
+          "name": "Sale detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/sale/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "sale", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Recorded sale transaction detail for a property."
+          }
+        },
+        {
+          "name": "Sale snapshot",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/sale/snapshot?postalcode=80212&startSaleSearchDate=2024-01-01&endSaleSearchDate=2024-12-31", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "sale", "snapshot"], "query": [{ "key": "postalcode", "value": "80212" }, { "key": "startSaleSearchDate", "value": "2024-01-01" }, { "key": "endSaleSearchDate", "value": "2024-12-31" }] },
+            "description": "Sale transactions for properties in an area over a date range."
+          }
+        },
+        {
+          "name": "Sales history detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/saleshistory/detail?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "saleshistory", "detail"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Up to ~10 years of recorded sales history for a property."
+          }
+        },
+        {
+          "name": "Sales history (basic)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/saleshistory/basichistory?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "saleshistory", "basichistory"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Essential sales history records for a property."
+          }
+        },
+        {
+          "name": "Sales history (expanded)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/saleshistory/expandedhistory?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "saleshistory", "expandedhistory"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Extended sales history records, including transaction and mortgage context, for a property."
+          }
+        },
+        {
+          "name": "Sales trend",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/transaction/salestrend?geoIdV4={{geoIdV4}}&interval=yearly&startyear=2022&endyear=2024", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "transaction", "salestrend"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }, { "key": "interval", "value": "yearly" }, { "key": "startyear", "value": "2022" }, { "key": "endyear", "value": "2024" }] },
+            "description": "Aggregated average/median sale prices and transaction counts for an area over an interval (up to two years)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mortgage",
+      "item": [
+        {
+          "name": "Property detail with mortgage",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/detailmortgage?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "detailmortgage"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Property characteristics plus current mortgage and lender information."
+          }
+        },
+        {
+          "name": "Property detail with mortgage and owner",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/detailmortgageowner?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "detailmortgageowner"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Combined property characteristics, mortgage/lender data, and owner information in a single call."
+          }
+        }
+      ]
+    },
+    {
+      "name": "School",
+      "item": [
+        {
+          "name": "Property detail with schools",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/property/detailwithschools?attomid=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "property", "detailwithschools"], "query": [{ "key": "attomid", "value": "145423726" }] },
+            "description": "Property characteristics plus the school attendance zones and schools serving the property."
+          }
+        },
+        {
+          "name": "School search",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/school/search?latitude=39.780062&longitude=-105.043284&radius=5", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "school", "search"], "query": [{ "key": "latitude", "value": "39.780062" }, { "key": "longitude", "value": "-105.043284" }, { "key": "radius", "value": "5" }] },
+            "description": "Search for schools within a radius of coordinates or within a school attendance area / geoIdV4."
+          }
+        },
+        {
+          "name": "School profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/school/profile?geoIdV4={{geoIdV4}}", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "school", "profile"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }] },
+            "description": "Profile for an individual school - grades, enrollment, ratings, and location."
+          }
+        },
+        {
+          "name": "School district",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/school/district?geoIdV4={{geoIdV4}}", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "school", "district"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }] },
+            "description": "Information about a school district, including boundaries and enrollment."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "All events detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/allevents/detail?id=145423726", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "allevents", "detail"], "query": [{ "key": "id", "value": "145423726" }] },
+            "description": "A consolidated view of every event on a property - assessment, AVM, sale, deed, and mortgage - in a single call."
+          }
+        },
+        {
+          "name": "All events snapshot",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/propertyapi/v1.0.0/allevents/snapshot?postalcode=80212", "host": ["{{baseUrl}}"], "path": ["propertyapi", "v1.0.0", "allevents", "snapshot"], "query": [{ "key": "postalcode", "value": "80212" }] },
+            "description": "Summary of property events for properties in an area."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Area & Boundary",
+      "item": [
+        {
+          "name": "Area geography lookup",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/areaapi/v2.0.0/geography/lookup?name=Denver&geographyTypeAbbreviation=PL", "host": ["{{baseUrl}}"], "path": ["areaapi", "v2.0.0", "geography", "lookup"], "query": [{ "key": "name", "value": "Denver" }, { "key": "geographyTypeAbbreviation", "value": "PL" }] },
+            "description": "Returns areas (with geoId / geoIdV4 codes) matching an area name and geography type. Modeled from ATTOM's Area API."
+          }
+        },
+        {
+          "name": "Area hierarchy lookup",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/areaapi/v2.0.0/hierarchy/lookup?geoIdV4={{geoIdV4}}", "host": ["{{baseUrl}}"], "path": ["areaapi", "v2.0.0", "hierarchy", "lookup"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }] },
+            "description": "Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API."
+          }
+        },
+        {
+          "name": "Area boundary detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/areaapi/v2.0.0/boundary/detail?geoIdV4={{geoIdV4}}&format=geojson", "host": ["{{baseUrl}}"], "path": ["areaapi", "v2.0.0", "boundary", "detail"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }, { "key": "format", "value": "geojson" }] },
+            "description": "Returns the boundary geometry for an area in GeoJSON format. Modeled from ATTOM's Area API boundary endpoint."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Community",
+      "item": [
+        {
+          "name": "Community detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v4/neighborhood/community?geoIdV4={{geoIdV4}}", "host": ["{{baseUrl}}"], "path": ["v4", "neighborhood", "community"], "query": [{ "key": "geoIdV4", "value": "{{geoIdV4}}" }] },
+            "description": "Community and neighborhood context for a place or geoIdV4 - climate, crime, demographics, natural hazards, education, and commute indicators."
+          }
+        }
+      ]
+    },
+    {
+      "name": "POI",
+      "item": [
+        {
+          "name": "POI search",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v4/neighborhood/poi?address=4529 Winona Court, Denver, CO&radius=5", "host": ["{{baseUrl}}"], "path": ["v4", "neighborhood", "poi"], "query": [{ "key": "address", "value": "4529 Winona Court, Denver, CO" }, { "key": "radius", "value": "5" }] },
+            "description": "Points-of-interest search returning nearby businesses and amenities within a radius. Modeled from ATTOM's POI API v4."
+          }
+        },
+        {
+          "name": "POI category lookup",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/v4/neighborhood/poi/category/lookup", "host": ["{{baseUrl}}"], "path": ["v4", "neighborhood", "poi", "category", "lookup"] },
+            "description": "Returns the supported POI business categories. Modeled from ATTOM's POI API v4."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transportation Noise",
+      "item": [
+        {
+          "name": "Transportation noise",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/transportationnoise?address=4529 Winona Court, Denver, CO", "host": ["{{baseUrl}}"], "path": ["transportationnoise"], "query": [{ "key": "address", "value": "4529 Winona Court, Denver, CO" }] },
+            "description": "Modeled transportation-noise scores for a location, estimating noise exposure from road, rail, and air traffic. Modeled from ATTOM's transportation-noise resource."
+          }
+        }
+      ]
+    }
+  ]
+}

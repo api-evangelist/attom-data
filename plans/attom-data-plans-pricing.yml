@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ATTOM
+providerId: attom-data
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Property Data
+- Real Estate
+- Valuation
+- Plans
+description: >-
+  ATTOM does not publish transparent per-endpoint list pricing for its API. The
+  documented public entry point is a 30-day free trial (register at
+  cloud.attomdata.com for immediate API access); production access is sold as
+  custom subscriptions negotiated with ATTOM sales. Subscriptions are commonly
+  scoped by the datasets/endpoints licensed, the volume of monthly API calls,
+  geographic coverage, and delivery method, with a per-minute call ceiling
+  (ATTOM documents a 200-calls-per-minute limit) plus a monthly call allowance
+  per plan. Third-party reports put entry-level API access in the low hundreds
+  of dollars per month, but ATTOM only publishes list pricing for its
+  Property Navigator end-user tool, not the API - treat all dollar figures as
+  unreconciled until confirmed with ATTOM.
+notes: >-
+  Exact tier names, monthly call allowances, and per-unit rates are not
+  published for the ATTOM API and must be reconciled with ATTOM sales. The only
+  numeric limit ATTOM documents publicly is 200 calls per minute; monthly call
+  volume is set per subscription.
+sources:
+- https://www.attomdata.com/solutions/property-data-api/
+- https://www.attomdata.com/solutions/property-data-api/faqs/
+- https://api.developer.attomdata.com/home
+- https://cloud-help.attomdata.com/article/527-using-attom-api
+- https://cloud-help.attomdata.com/article/631-api-usage-reset
+plans:
+- id: attom-free-trial
+  name: Free Trial
+  type: trial
+  description: >-
+    30-day free trial giving immediate access to the ATTOM API after
+    registering at cloud.attomdata.com. Intended for evaluation and
+    integration testing against real endpoints.
+  entries:
+  - label: Trial Duration
+    name: trial_duration
+    type: flat
+    metric: days
+    limit: 30
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free for 30 days
+    userMultiplied: false
+  elements:
+  - name: Immediate API Access
+  - name: Sample Endpoints and Data
+  - name: API Key
+- id: attom-subscription
+  name: API Subscription (Custom)
+  type: paid
+  description: >-
+    Production ATTOM API subscription, priced per the datasets/endpoints
+    licensed, monthly call volume, geographic coverage, and delivery method.
+    Enforces a per-minute call ceiling and a monthly call allowance defined by
+    the plan. Pricing is quoted by ATTOM sales.
+  entries:
+  - label: Monthly API Calls
+    name: monthly_api_calls
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales (allowance set per subscription)
+    userMultiplied: false
+  elements:
+  - name: Licensed Endpoints and Datasets
+  - name: Monthly Call Allowance
+  - name: 200 Calls per Minute Ceiling
+  - name: Support
+- id: attom-enterprise
+  name: Enterprise / Bulk & Custom Delivery
+  type: enterprise
+  description: >-
+    Enterprise agreements for high-volume API usage, custom rate limits, bulk
+    file/data-warehouse delivery, and negotiated coverage, SLAs, and terms.
+    Contact ATTOM.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Rate Limits
+  - name: Bulk and Data Warehouse Delivery
+  - name: Custom Coverage and SLAs
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

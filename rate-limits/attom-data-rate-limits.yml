@@ -1,0 +1,70 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ATTOM
+providerId: attom-data
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Property Data
+- Real Estate
+- Rate Limiting
+- Quotas
+description: >-
+  ATTOM reserves the option to limit calls per minute, hour, day, and month to
+  keep response times acceptable across customers. The single numeric limit
+  ATTOM documents publicly is 200 API calls per minute. Beyond that, each
+  subscription plan carries a fixed number of allowed calls per month; the
+  monthly allowance resets on the subscription's usage cycle. Response payloads
+  are capped at 100 records per page (default page sizes are smaller), and
+  radius searches default to 5 miles with a 20-mile maximum. Enterprise
+  customers can negotiate custom per-minute and monthly limits with ATTOM in
+  advance.
+notes: >-
+  Only the 200-calls-per-minute limit is published; per-hour/day limits are
+  reserved but not published, and the monthly call allowance is set per plan.
+  Confirm current numbers and the usage-reset cycle with ATTOM.
+sources:
+- https://www.attomdata.com/solutions/property-data-api/faqs/
+- https://cloud-help.attomdata.com/article/527-using-attom-api
+- https://cloud-help.attomdata.com/article/631-api-usage-reset
+- https://cloud-help.attomdata.com/article/687-api-search-parameters
+responseCodes:
+  throttled: 429
+limits:
+- name: Calls Per Minute
+  scope: account
+  metric: requests
+  limit: 200 per minute
+  notes: The only numeric rate limit ATTOM documents publicly; may be customized for enterprise plans.
+- name: Monthly Call Allowance
+  scope: account
+  metric: requests
+  limit: per plan
+  notes: Each subscription includes a set number of calls per month; resets on the plan's usage cycle.
+- name: Reserved Time-Window Limits
+  scope: account
+  metric: requests
+  limit: reserved (per minute/hour/day/month)
+  notes: ATTOM reserves the right to enforce per-minute, per-hour, per-day, and per-month limits to protect response times.
+- name: Records Per Page
+  scope: request
+  metric: records
+  limit: 100 max per page
+  notes: Responses are paginated; page size defaults are smaller than the 100-record maximum.
+- name: Search Radius
+  scope: request
+  metric: miles
+  limit: 20 miles max (5 default)
+  notes: Radius searches default to 5 miles and cap at 20 miles.
+policies:
+- name: Fair Use Throttling
+  description: ATTOM throttles calls that exceed the per-minute ceiling to maintain acceptable response times for all customers.
+- name: Monthly Usage Reset
+  description: The monthly call allowance resets on the subscription's usage cycle; overage handling is defined by the plan.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

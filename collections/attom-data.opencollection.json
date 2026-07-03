@@ -1,0 +1,265 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "apikey",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Property", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Property ID lookup", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/id?address1=4529 Winona Court&address2=Denver, CO" },
+          "docs": "Returns the ATTOM-assigned property ID and minimal identity fields for matching properties."
+        },
+        {
+          "info": { "name": "Property basic profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/basicprofile?address=4529 Winona Court, Denver, CO" },
+          "docs": "Essential property profile - address, location, lot, and building basics - for a specific address or APN/FIPS."
+        },
+        {
+          "info": { "name": "Property detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?attomid=145423726" },
+          "docs": "Comprehensive property characteristics for a property or list of properties."
+        },
+        {
+          "info": { "name": "Property expanded profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/expandedprofile?address1=4529 Winona Court&address2=Denver, CO" },
+          "docs": "Extended property profile combining characteristics, most-recent sale, assessment, and AVM in one call."
+        },
+        {
+          "info": { "name": "Property address radius search", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?latitude=39.780062&longitude=-105.043284&radius=1" },
+          "docs": "Radius search returning all properties within a given radius (miles) of coordinates."
+        },
+        {
+          "info": { "name": "Property snapshot", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/snapshot?postalcode=80212" },
+          "docs": "Returns properties in an area matching characteristic filters such as beds, baths, size, value, and lot size."
+        },
+        {
+          "info": { "name": "Property detail with owner", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailowner?attomid=145423726" },
+          "docs": "Property characteristics plus current owner names and mailing information."
+        },
+        {
+          "info": { "name": "Property building permits", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/buildingpermits?attomid=145423726" },
+          "docs": "Building permit records for a property."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Assessment", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Assessment detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/detail?attomid=145423726" },
+          "docs": "County assessment data - assessed and market values, tax amounts, and exemptions - for a property."
+        },
+        {
+          "info": { "name": "Assessment snapshot", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/snapshot?postalcode=80212" },
+          "docs": "Assessment summary for properties in an area matching value or characteristic filters."
+        },
+        {
+          "info": { "name": "Assessment history detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessmenthistory/detail?attomid=145423726" },
+          "docs": "Historical assessment records for a property."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Valuation (AVM)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "ATTOM AVM detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail?address1=4529 Winona Court&address2=Denver, CO" },
+          "docs": "Detailed AVM calculation for a property - estimated value, confidence score, and high/low value range."
+        },
+        {
+          "info": { "name": "AVM snapshot", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/snapshot?postalcode=80212" },
+          "docs": "Automated Valuation Model summary for properties in an area."
+        },
+        {
+          "info": { "name": "AVM history detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/avmhistory/detail?attomid=145423726" },
+          "docs": "Historical AVM values for a property over time."
+        },
+        {
+          "info": { "name": "Rental AVM", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/valuation/rentalavm?attomid=145423726" },
+          "docs": "Estimated market rent (rental AVM) for a property, with a value range."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Home Equity", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Home equity", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/valuation/homeequity?attomid=145423726" },
+          "docs": "Estimated home equity for a property, combining the AVM value with outstanding mortgage balances to return an equity position and loan-to-value indication."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Sales & Deed", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Sale detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/detail?attomid=145423726" },
+          "docs": "Recorded sale transaction detail for a property."
+        },
+        {
+          "info": { "name": "Sale snapshot", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/snapshot?postalcode=80212&startSaleSearchDate=2024-01-01&endSaleSearchDate=2024-12-31" },
+          "docs": "Sale transactions for properties in an area over a date range."
+        },
+        {
+          "info": { "name": "Sales history detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/detail?attomid=145423726" },
+          "docs": "Up to ~10 years of recorded sales history for a property."
+        },
+        {
+          "info": { "name": "Sales history (basic)", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/basichistory?attomid=145423726" },
+          "docs": "Essential sales history records for a property."
+        },
+        {
+          "info": { "name": "Sales history (expanded)", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/expandedhistory?attomid=145423726" },
+          "docs": "Extended sales history records, including transaction and mortgage context, for a property."
+        },
+        {
+          "info": { "name": "Sales trend", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/transaction/salestrend?geoIdV4={{geoIdV4}}&interval=yearly&startyear=2022&endyear=2024" },
+          "docs": "Aggregated average/median sale prices and transaction counts for an area over an interval (up to two years)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Mortgage", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Property detail with mortgage", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgage?attomid=145423726" },
+          "docs": "Property characteristics plus current mortgage and lender information."
+        },
+        {
+          "info": { "name": "Property detail with mortgage and owner", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgageowner?attomid=145423726" },
+          "docs": "Combined property characteristics, mortgage/lender data, and owner information in a single call."
+        }
+      ]
+    },
+    {
+      "info": { "name": "School", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Property detail with schools", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailwithschools?attomid=145423726" },
+          "docs": "Property characteristics plus the school attendance zones and schools serving the property."
+        },
+        {
+          "info": { "name": "School search", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/search?latitude=39.780062&longitude=-105.043284&radius=5" },
+          "docs": "Search for schools within a radius of coordinates or within a school attendance area / geoIdV4."
+        },
+        {
+          "info": { "name": "School profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/profile?geoIdV4={{geoIdV4}}" },
+          "docs": "Profile for an individual school - grades, enrollment, ratings, and location."
+        },
+        {
+          "info": { "name": "School district", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/district?geoIdV4={{geoIdV4}}" },
+          "docs": "Information about a school district, including boundaries and enrollment."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Events", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "All events detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/allevents/detail?id=145423726" },
+          "docs": "A consolidated view of every event on a property - assessment, AVM, sale, deed, and mortgage - in a single call."
+        },
+        {
+          "info": { "name": "All events snapshot", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/allevents/snapshot?postalcode=80212" },
+          "docs": "Summary of property events for properties in an area."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Area & Boundary", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Area geography lookup", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/geography/lookup?name=Denver&geographyTypeAbbreviation=PL" },
+          "docs": "Returns areas (with geoId / geoIdV4 codes) matching an area name and geography type. Modeled from ATTOM's Area API."
+        },
+        {
+          "info": { "name": "Area hierarchy lookup", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/hierarchy/lookup?geoIdV4={{geoIdV4}}" },
+          "docs": "Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API."
+        },
+        {
+          "info": { "name": "Area boundary detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/boundary/detail?geoIdV4={{geoIdV4}}&format=geojson" },
+          "docs": "Returns the boundary geometry for an area in GeoJSON format. Modeled from ATTOM's Area API boundary endpoint."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Community", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Community detail", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/v4/neighborhood/community?geoIdV4={{geoIdV4}}" },
+          "docs": "Community and neighborhood context for a place or geoIdV4 - climate, crime, demographics, natural hazards, education, and commute indicators."
+        }
+      ]
+    },
+    {
+      "info": { "name": "POI", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "POI search", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/v4/neighborhood/poi?address=4529 Winona Court, Denver, CO&radius=5" },
+          "docs": "Points-of-interest search returning nearby businesses and amenities within a radius. Modeled from ATTOM's POI API v4."
+        },
+        {
+          "info": { "name": "POI category lookup", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/v4/neighborhood/poi/category/lookup" },
+          "docs": "Returns the supported POI business categories. Modeled from ATTOM's POI API v4."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Transportation Noise", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Transportation noise", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.gateway.attomdata.com/transportationnoise?address=4529 Winona Court, Denver, CO" },
+          "docs": "Modeled transportation-noise scores for a location, estimating noise exposure from road, rail, and air traffic. Modeled from ATTOM's transportation-noise resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
