@@ -282,6 +282,10 @@ apis:
     outstanding mortgage balances to return an estimated equity position and
     loan-to-value indication via the valuation home-equity package.
 common:
+- type: DomainSecurity
+  url: security/attom-data-domain-security.yml
+- type: Authentication
+  url: authentication/attom-data-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/attom-data-solutions
 - type: Website
@@ -292,6 +296,8 @@ common:
   url: plans/attom-data-plans-pricing.yml
 - type: RateLimits
   url: rate-limits/attom-data-rate-limits.yml
+- url: https://www.attomdata.com/feed/
+  type: Blog
 - type: FinOps
   url: finops/attom-data-finops.yml
 maintainers:

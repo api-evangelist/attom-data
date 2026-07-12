@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/attom-data-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: apikey
+  description: 'Your unique ATTOM API key, assigned by ATTOM and passed in the `apikey` request
+    header. Also send `Accept: application/json` (or application/xml).'
+  sources:
+  - openapi/attom-data-openapi.yml
