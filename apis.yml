@@ -282,6 +282,8 @@ apis:
     outstanding mortgage balances to return an estimated equity position and
     loan-to-value indication via the valuation home-equity package.
 common:
+- type: AgenticAccess
+  url: agentic-access/attom-data-agentic-access.yml
 - type: DomainSecurity
   url: security/attom-data-domain-security.yml
 - type: Authentication
