@@ -1,0 +1,363 @@
+openapi: 3.0.3
+info:
+  title: ATTOM Area Property API
+  description: 'The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions'' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.
+
+    Every request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.
+
+    Endpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM''s published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM''s documented resource groups; confirm exact query parameters against the live docs.'
+  version: 1.0.0
+  contact:
+    name: ATTOM Data Solutions
+    url: https://www.attomdata.com
+  x-logo:
+    url: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+servers:
+- url: https://api.gateway.attomdata.com
+  description: ATTOM API gateway (production)
+security:
+- apiKeyAuth: []
+tags:
+- name: Property
+  description: Core property characteristics packages.
+paths:
+  /propertyapi/v1.0.0/property/id:
+    get:
+      operationId: getPropertyId
+      tags:
+      - Property
+      summary: Property ID lookup
+      description: Returns the ATTOM-assigned property ID and minimal identity fields for matching properties.
+      parameters:
+      - $ref: '#/components/parameters/Address'
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/basicprofile:
+    get:
+      operationId: getPropertyBasicProfile
+      tags:
+      - Property
+      summary: Property basic profile
+      description: Essential property profile - address, location, lot, and building basics - for a specific address or APN/FIPS.
+      parameters:
+      - $ref: '#/components/parameters/Address'
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      - $ref: '#/components/parameters/Apn'
+      - $ref: '#/components/parameters/Fips'
+      - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/detail:
+    get:
+      operationId: getPropertyDetail
+      tags:
+      - Property
+      summary: Property detail
+      description: Comprehensive property characteristics for a property or list of properties.
+      parameters:
+      - $ref: '#/components/parameters/Address'
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/expandedprofile:
+    get:
+      operationId: getPropertyExpandedProfile
+      tags:
+      - Property
+      summary: Property expanded profile
+      description: Extended property profile combining characteristics, most-recent sale, assessment, and AVM in one call.
+      parameters:
+      - $ref: '#/components/parameters/Address'
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/address:
+    get:
+      operationId: getPropertyAddress
+      tags:
+      - Property
+      summary: Property address radius search
+      description: Radius search returning all properties within a given radius (miles) of coordinates or a postal code.
+      parameters:
+      - $ref: '#/components/parameters/Latitude'
+      - $ref: '#/components/parameters/Longitude'
+      - $ref: '#/components/parameters/Radius'
+      - $ref: '#/components/parameters/PostalCode'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/snapshot:
+    get:
+      operationId: getPropertySnapshot
+      tags:
+      - Property
+      summary: Property snapshot
+      description: Returns properties in an area matching characteristic filters such as beds, baths, size, value, and lot size.
+      parameters:
+      - $ref: '#/components/parameters/PostalCode'
+      - $ref: '#/components/parameters/Latitude'
+      - $ref: '#/components/parameters/Longitude'
+      - $ref: '#/components/parameters/Radius'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/detailowner:
+    get:
+      operationId: getPropertyDetailOwner
+      tags:
+      - Property
+      summary: Property detail with owner
+      description: Property characteristics plus current owner names and mailing information.
+      parameters:
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /propertyapi/v1.0.0/property/buildingpermits:
+    get:
+      operationId: getPropertyBuildingPermits
+      tags:
+      - Property
+      summary: Property building permits
+      description: Building permit records for a property.
+      parameters:
+      - $ref: '#/components/parameters/Address1'
+      - $ref: '#/components/parameters/Address2'
+      - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200':
+          $ref: '#/components/responses/PropertyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    Radius:
+      name: radius
+      in: query
+      schema:
+        type: number
+        format: double
+        default: 5
+        maximum: 20
+      description: Search radius in miles (default 5, maximum 20).
+    Address2:
+      name: address2
+      in: query
+      schema:
+        type: string
+      description: Second line of the address (city, state).
+    Fips:
+      name: fips
+      in: query
+      schema:
+        type: string
+      description: County FIPS code; use with apn.
+    Longitude:
+      name: longitude
+      in: query
+      schema:
+        type: number
+        format: double
+      description: Longitude of the search center.
+    AttomId:
+      name: attomid
+      in: query
+      schema:
+        type: string
+      description: ATTOM-assigned property identifier.
+    PageSize:
+      name: pagesize
+      in: query
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+      description: Number of records per page (maximum 100).
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: Page number for paginated results.
+    Address1:
+      name: address1
+      in: query
+      schema:
+        type: string
+      description: First line of the street address (house number and street).
+    PostalCode:
+      name: postalcode
+      in: query
+      schema:
+        type: string
+      description: 5-digit ZIP / postal code to scope the search.
+    Apn:
+      name: apn
+      in: query
+      schema:
+        type: string
+      description: Assessor parcel number; use with fips.
+    Address:
+      name: address
+      in: query
+      schema:
+        type: string
+      description: Full one-line street address (e.g. "4529 Winona Court, Denver, CO").
+    Latitude:
+      name: latitude
+      in: query
+      schema:
+        type: number
+        format: double
+      description: Latitude of the search center.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusEnvelope'
+    BadRequest:
+      description: The request was missing required parameters or was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusEnvelope'
+    PropertyResponse:
+      description: A status envelope plus an array of property records.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyResponse'
+  schemas:
+    Status:
+      type: object
+      description: The status block returned on every ATTOM response.
+      properties:
+        version:
+          type: string
+        code:
+          type: integer
+        msg:
+          type: string
+        total:
+          type: integer
+        page:
+          type: integer
+        pagesize:
+          type: integer
+    PropertyResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        property:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+    StatusEnvelope:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+    Property:
+      type: object
+      description: A property record. ATTOM returns a rich, package-dependent object; key groups are summarized here.
+      properties:
+        identifier:
+          type: object
+          properties:
+            obPropId:
+              type: string
+            attomId:
+              type: integer
+            fips:
+              type: string
+            apn:
+              type: string
+        address:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+            countrySubd:
+              type: string
+            postal1:
+              type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: string
+            longitude:
+              type: string
+            geoIdV4:
+              type: object
+              additionalProperties:
+                type: string
+        summary:
+          type: object
+          additionalProperties: true
+        building:
+          type: object
+          additionalProperties: true
+        assessment:
+          type: object
+          additionalProperties: true
+        avm:
+          type: object
+          additionalProperties: true
+        sale:
+          type: object
+          additionalProperties: true
+        mortgage:
+          type: object
+          additionalProperties: true
+        owner:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: 'Your unique ATTOM API key, assigned by ATTOM and passed in the `apikey` request header. Also send `Accept: application/json` (or application/xml).'

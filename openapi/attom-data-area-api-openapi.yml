@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: ATTOM Area API
+  description: 'The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions'' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.
+
+    Every request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.
+
+    Endpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM''s published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM''s documented resource groups; confirm exact query parameters against the live docs.'
+  version: 1.0.0
+  contact:
+    name: ATTOM Data Solutions
+    url: https://www.attomdata.com
+  x-logo:
+    url: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+servers:
+- url: https://api.gateway.attomdata.com
+  description: ATTOM API gateway (production)
+security:
+- apiKeyAuth: []
+tags:
+- name: Area
+  description: Area geography, geoId lookups, and boundaries (v2/v4).
+paths:
+  /areaapi/v2.0.0/geography/lookup:
+    get:
+      operationId: getAreaGeographyLookup
+      tags:
+      - Area
+      summary: Area geography lookup
+      description: Returns a list of areas (with geoId / geoIdV4 codes) matching an area name and geography type (county, place, neighborhood, school district, ZIP code tabulation area, and others). Modeled from ATTOM's Area API v2/v4 lookups.
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: Area name to search for.
+      - name: geographyTypeAbbreviation
+        in: query
+        schema:
+          type: string
+        description: Geography type code (e.g. CO, PL, N2, DB, ZI).
+      responses:
+        '200':
+          $ref: '#/components/responses/AreaResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /areaapi/v2.0.0/hierarchy/lookup:
+    get:
+      operationId: getAreaHierarchyLookup
+      tags:
+      - Area
+      summary: Area hierarchy lookup
+      description: Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API.
+      parameters:
+      - $ref: '#/components/parameters/GeoIdV4'
+      responses:
+        '200':
+          $ref: '#/components/responses/AreaResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /areaapi/v2.0.0/boundary/detail:
+    get:
+      operationId: getAreaBoundaryDetail
+      tags:
+      - Area
+      summary: Area boundary detail
+      description: Returns the boundary geometry for an area in GeoJSON format, for most geographies supported by the geocoding system. Modeled from ATTOM's Area API boundary endpoint.
+      parameters:
+      - $ref: '#/components/parameters/GeoIdV4'
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - geojson
+          - wkt
+        description: Boundary geometry format.
+      responses:
+        '200':
+          $ref: '#/components/responses/AreaResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    GenericResponse:
+      type: object
+      description: Generic envelope for area, school, community, POI, and boundary responses.
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+      additionalProperties: true
+    Status:
+      type: object
+      description: The status block returned on every ATTOM response.
+      properties:
+        version:
+          type: string
+        code:
+          type: integer
+        msg:
+          type: string
+        total:
+          type: integer
+        page:
+          type: integer
+        pagesize:
+          type: integer
+    StatusEnvelope:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+  responses:
+    AreaResponse:
+      description: A status envelope plus an array of area, school, community, or POI records.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusEnvelope'
+  parameters:
+    GeoIdV4:
+      name: geoIdV4
+      in: query
+      schema:
+        type: string
+      description: 32-character geoIdV4 area identifier (required by v4-and-above endpoints).
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: 'Your unique ATTOM API key, assigned by ATTOM and passed in the `apikey` request header. Also send `Accept: application/json` (or application/xml).'
