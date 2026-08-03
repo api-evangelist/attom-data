@@ -1,0 +1,36 @@
+{
+  "provider": "attom-data",
+  "sources": [
+    "attom-data-area-api-openapi.yml",
+    "attom-data-assessment-api-openapi.yml",
+    "attom-data-community-api-openapi.yml",
+    "attom-data-events-api-openapi.yml",
+    "attom-data-home-equity-api-openapi.yml",
+    "attom-data-mortgage-api-openapi.yml",
+    "attom-data-poi-api-openapi.yml",
+    "attom-data-property-api-openapi.yml",
+    "attom-data-sales-api-openapi.yml",
+    "attom-data-school-api-openapi.yml",
+    "attom-data-transportation-noise-api-openapi.yml",
+    "attom-data-valuation-api-openapi.yml"
+  ],
+  "outputs": [
+    "attom-data-area-api-openapi.yml",
+    "attom-data-assessment-api-openapi.yml",
+    "attom-data-community-api-openapi.yml",
+    "attom-data-events-api-openapi.yml",
+    "attom-data-home-equity-api-openapi.yml",
+    "attom-data-mortgage-api-openapi.yml",
+    "attom-data-poi-api-openapi.yml",
+    "attom-data-property-api-openapi.yml",
+    "attom-data-sales-api-openapi.yml",
+    "attom-data-school-api-openapi.yml",
+    "attom-data-transportation-noise-api-openapi.yml",
+    "attom-data-valuation-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

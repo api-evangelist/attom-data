@@ -1,0 +1,793 @@
+openapi: 3.0.3
+info:
+  title: ATTOM API
+  description: >-
+    The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data
+    Solutions' national warehouse of property, real estate, and location data
+    covering 158+ million U.S. properties. Resources are queried by address,
+    APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover
+    property characteristics, tax assessments, automated valuations (AVM),
+    sales and deed history, mortgage records, area and boundary geographies,
+    schools, community/neighborhood data, points of interest, transportation
+    noise, consolidated all-event history, and home equity.
+
+    Every request requires an API key passed in the `apikey` header. The URI
+    pattern for the classic Property API is
+    `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4)
+    endpoints drop the component name and use a simplified `{base}/v4/{resource}`
+    form. Area geography endpoints live under `areaapi/v2.0.0`.
+
+    Endpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale,
+    saleshistory, salestrend, school, allevents, valuation) are grounded in
+    ATTOM's published endpoint reference. The v4 community, POI, area/boundary,
+    and transportation-noise operations are modeled from ATTOM's documented
+    resource groups; confirm exact query parameters against the live docs.
+  version: '1.0.0'
+  contact:
+    name: ATTOM Data Solutions
+    url: https://www.attomdata.com
+  x-logo:
+    url: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+servers:
+  - url: https://api.gateway.attomdata.com
+    description: ATTOM API gateway (production)
+security:
+  - apiKeyAuth: []
+tags:
+  - name: Property
+    description: Core property characteristics packages.
+  - name: Assessment
+    description: County tax assessment data.
+  - name: Valuation
+    description: Automated Valuation Model (AVM) and rental value.
+  - name: Sales
+    description: Recorded sale, deed, sales history, and sales trend data.
+  - name: Mortgage
+    description: Property records enriched with mortgage and owner data.
+  - name: School
+    description: Schools, school districts, and attendance zones.
+  - name: Area
+    description: Area geography, geoId lookups, and boundaries (v2/v4).
+  - name: Community
+    description: Neighborhood and community context (v4).
+  - name: POI
+    description: Points of interest (v4).
+  - name: Transportation Noise
+    description: Modeled transportation-noise scores.
+  - name: Events
+    description: Consolidated all-event property history.
+  - name: Home Equity
+    description: Estimated home equity and loan-to-value.
+paths:
+  /propertyapi/v1.0.0/property/id:
+    get:
+      operationId: getPropertyId
+      tags: [Property]
+      summary: Property ID lookup
+      description: Returns the ATTOM-assigned property ID and minimal identity fields for matching properties.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/basicprofile:
+    get:
+      operationId: getPropertyBasicProfile
+      tags: [Property]
+      summary: Property basic profile
+      description: Essential property profile - address, location, lot, and building basics - for a specific address or APN/FIPS.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/Apn'
+        - $ref: '#/components/parameters/Fips'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/detail:
+    get:
+      operationId: getPropertyDetail
+      tags: [Property]
+      summary: Property detail
+      description: Comprehensive property characteristics for a property or list of properties.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/expandedprofile:
+    get:
+      operationId: getPropertyExpandedProfile
+      tags: [Property]
+      summary: Property expanded profile
+      description: Extended property profile combining characteristics, most-recent sale, assessment, and AVM in one call.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/address:
+    get:
+      operationId: getPropertyAddress
+      tags: [Property]
+      summary: Property address radius search
+      description: Radius search returning all properties within a given radius (miles) of coordinates or a postal code.
+      parameters:
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/snapshot:
+    get:
+      operationId: getPropertySnapshot
+      tags: [Property]
+      summary: Property snapshot
+      description: Returns properties in an area matching characteristic filters such as beds, baths, size, value, and lot size.
+      parameters:
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/detailowner:
+    get:
+      operationId: getPropertyDetailOwner
+      tags: [Property]
+      summary: Property detail with owner
+      description: Property characteristics plus current owner names and mailing information.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/buildingpermits:
+    get:
+      operationId: getPropertyBuildingPermits
+      tags: [Property]
+      summary: Property building permits
+      description: Building permit records for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/detailmortgage:
+    get:
+      operationId: getPropertyDetailMortgage
+      tags: [Mortgage]
+      summary: Property detail with mortgage
+      description: Property characteristics plus current mortgage and lender information.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/detailmortgageowner:
+    get:
+      operationId: getPropertyDetailMortgageOwner
+      tags: [Mortgage]
+      summary: Property detail with mortgage and owner
+      description: Combined property characteristics, mortgage/lender data, and owner information in a single call.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/property/detailwithschools:
+    get:
+      operationId: getPropertyDetailWithSchools
+      tags: [School]
+      summary: Property detail with schools
+      description: Property characteristics plus the school attendance zones and schools serving the property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/assessment/detail:
+    get:
+      operationId: getAssessmentDetail
+      tags: [Assessment]
+      summary: Assessment detail
+      description: County assessment data - assessed and market values, tax amounts, and exemptions - for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/assessment/snapshot:
+    get:
+      operationId: getAssessmentSnapshot
+      tags: [Assessment]
+      summary: Assessment snapshot
+      description: Assessment summary for properties in an area matching value or characteristic filters.
+      parameters:
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/assessmenthistory/detail:
+    get:
+      operationId: getAssessmentHistoryDetail
+      tags: [Assessment]
+      summary: Assessment history detail
+      description: Historical assessment records for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/avm/snapshot:
+    get:
+      operationId: getAvmSnapshot
+      tags: [Valuation]
+      summary: AVM snapshot
+      description: Automated Valuation Model summary for properties in an area.
+      parameters:
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/attomavm/detail:
+    get:
+      operationId: getAttomAvmDetail
+      tags: [Valuation]
+      summary: ATTOM AVM detail
+      description: Detailed AVM calculation for a property - estimated value, confidence score, and high/low value range.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/avmhistory/detail:
+    get:
+      operationId: getAvmHistoryDetail
+      tags: [Valuation]
+      summary: AVM history detail
+      description: Historical AVM values for a property over time.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/valuation/rentalavm:
+    get:
+      operationId: getRentalAvm
+      tags: [Valuation]
+      summary: Rental AVM
+      description: Estimated market rent (rental AVM) for a property, with a value range.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/valuation/homeequity:
+    get:
+      operationId: getHomeEquity
+      tags: [Home Equity]
+      summary: Home equity
+      description: >-
+        Estimated home equity for a property, combining the AVM value with
+        outstanding mortgage balances to return an estimated equity position and
+        loan-to-value indication.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/sale/detail:
+    get:
+      operationId: getSaleDetail
+      tags: [Sales]
+      summary: Sale detail
+      description: Recorded sale transaction detail for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/sale/snapshot:
+    get:
+      operationId: getSaleSnapshot
+      tags: [Sales]
+      summary: Sale snapshot
+      description: Sale transactions for properties in an area over a date range.
+      parameters:
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/StartSaleSearchDate'
+        - $ref: '#/components/parameters/EndSaleSearchDate'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/saleshistory/detail:
+    get:
+      operationId: getSalesHistoryDetail
+      tags: [Sales]
+      summary: Sales history detail
+      description: Up to ~10 years of recorded sales history for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/saleshistory/basichistory:
+    get:
+      operationId: getSalesHistoryBasic
+      tags: [Sales]
+      summary: Sales history (basic)
+      description: Essential sales history records for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/saleshistory/expandedhistory:
+    get:
+      operationId: getSalesHistoryExpanded
+      tags: [Sales]
+      summary: Sales history (expanded)
+      description: Extended sales history records, including transaction and mortgage context, for a property.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/transaction/salestrend:
+    get:
+      operationId: getSalesTrend
+      tags: [Sales]
+      summary: Sales trend
+      description: Aggregated average/median sale prices and transaction counts for an area over an interval (up to two years).
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+        - $ref: '#/components/parameters/Interval'
+        - $ref: '#/components/parameters/StartYear'
+        - $ref: '#/components/parameters/EndYear'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/allevents/detail:
+    get:
+      operationId: getAllEventsDetail
+      tags: [Events]
+      summary: All events detail
+      description: >-
+        A consolidated view of every event on a property - assessment, AVM, sale,
+        deed, and mortgage - in a single call.
+      parameters:
+        - $ref: '#/components/parameters/Address1'
+        - $ref: '#/components/parameters/Address2'
+        - $ref: '#/components/parameters/AttomId'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/allevents/snapshot:
+    get:
+      operationId: getAllEventsSnapshot
+      tags: [Events]
+      summary: All events snapshot
+      description: Summary of property events for properties in an area.
+      parameters:
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+      responses:
+        '200': { $ref: '#/components/responses/PropertyResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/school/search:
+    get:
+      operationId: getSchoolSearch
+      tags: [School]
+      summary: School search
+      description: Search for schools within a radius of coordinates or within a school attendance area / geoIdV4.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/school/profile:
+    get:
+      operationId: getSchoolProfile
+      tags: [School]
+      summary: School profile
+      description: Profile for an individual school - grades, enrollment, ratings, and location.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /propertyapi/v1.0.0/school/district:
+    get:
+      operationId: getSchoolDistrict
+      tags: [School]
+      summary: School district
+      description: Information about a school district, including boundaries and enrollment.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /areaapi/v2.0.0/geography/lookup:
+    get:
+      operationId: getAreaGeographyLookup
+      tags: [Area]
+      summary: Area geography lookup
+      description: >-
+        Returns a list of areas (with geoId / geoIdV4 codes) matching an area name
+        and geography type (county, place, neighborhood, school district, ZIP code
+        tabulation area, and others). Modeled from ATTOM's Area API v2/v4 lookups.
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+          description: Area name to search for.
+        - name: geographyTypeAbbreviation
+          in: query
+          schema: { type: string }
+          description: Geography type code (e.g. CO, PL, N2, DB, ZI).
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /areaapi/v2.0.0/hierarchy/lookup:
+    get:
+      operationId: getAreaHierarchyLookup
+      tags: [Area]
+      summary: Area hierarchy lookup
+      description: Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /areaapi/v2.0.0/boundary/detail:
+    get:
+      operationId: getAreaBoundaryDetail
+      tags: [Area]
+      summary: Area boundary detail
+      description: >-
+        Returns the boundary geometry for an area in GeoJSON format, for most
+        geographies supported by the geocoding system. Modeled from ATTOM's
+        Area API boundary endpoint.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+        - name: format
+          in: query
+          schema: { type: string, enum: [geojson, wkt] }
+          description: Boundary geometry format.
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v4/neighborhood/community:
+    get:
+      operationId: getCommunity
+      tags: [Community]
+      summary: Community detail
+      description: >-
+        Community and neighborhood context for a place or geoIdV4 - climate,
+        crime, demographics, natural hazards, education, and commute indicators.
+      parameters:
+        - $ref: '#/components/parameters/GeoIdV4'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v4/neighborhood/poi:
+    get:
+      operationId: getPoiSearch
+      tags: [POI]
+      summary: POI search
+      description: >-
+        Points-of-interest search returning nearby businesses and amenities within
+        a radius of coordinates or an address. Modeled from ATTOM's POI API v4.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+        - $ref: '#/components/parameters/Radius'
+        - name: categoryName
+          in: query
+          schema: { type: string }
+          description: One or more POI category names to filter by.
+        - name: recordLimit
+          in: query
+          schema: { type: integer, default: 20 }
+          description: Maximum number of POI records to return.
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /v4/neighborhood/poi/category/lookup:
+    get:
+      operationId: getPoiCategoryLookup
+      tags: [POI]
+      summary: POI category lookup
+      description: Returns the supported POI business categories. Modeled from ATTOM's POI API v4.
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /transportationnoise:
+    get:
+      operationId: getTransportationNoise
+      tags: [Transportation Noise]
+      summary: Transportation noise
+      description: >-
+        Modeled transportation-noise scores for a location, estimating noise
+        exposure from road, rail, and air traffic. Modeled from ATTOM's
+        transportation-noise resource; confirm the exact path and parameters
+        against the live documentation.
+      parameters:
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Latitude'
+        - $ref: '#/components/parameters/Longitude'
+      responses:
+        '200': { $ref: '#/components/responses/AreaResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: >-
+        Your unique ATTOM API key, assigned by ATTOM and passed in the `apikey`
+        request header. Also send `Accept: application/json` (or application/xml).
+  parameters:
+    Address:
+      name: address
+      in: query
+      schema: { type: string }
+      description: Full one-line street address (e.g. "4529 Winona Court, Denver, CO").
+    Address1:
+      name: address1
+      in: query
+      schema: { type: string }
+      description: First line of the street address (house number and street).
+    Address2:
+      name: address2
+      in: query
+      schema: { type: string }
+      description: Second line of the address (city, state).
+    Apn:
+      name: apn
+      in: query
+      schema: { type: string }
+      description: Assessor parcel number; use with fips.
+    Fips:
+      name: fips
+      in: query
+      schema: { type: string }
+      description: County FIPS code; use with apn.
+    AttomId:
+      name: attomid
+      in: query
+      schema: { type: string }
+      description: ATTOM-assigned property identifier.
+    PostalCode:
+      name: postalcode
+      in: query
+      schema: { type: string }
+      description: 5-digit ZIP / postal code to scope the search.
+    Latitude:
+      name: latitude
+      in: query
+      schema: { type: number, format: double }
+      description: Latitude of the search center.
+    Longitude:
+      name: longitude
+      in: query
+      schema: { type: number, format: double }
+      description: Longitude of the search center.
+    Radius:
+      name: radius
+      in: query
+      schema: { type: number, format: double, default: 5, maximum: 20 }
+      description: Search radius in miles (default 5, maximum 20).
+    Page:
+      name: page
+      in: query
+      schema: { type: integer, default: 1 }
+      description: Page number for paginated results.
+    PageSize:
+      name: pagesize
+      in: query
+      schema: { type: integer, default: 10, maximum: 100 }
+      description: Number of records per page (maximum 100).
+    GeoIdV4:
+      name: geoIdV4
+      in: query
+      schema: { type: string }
+      description: 32-character geoIdV4 area identifier (required by v4-and-above endpoints).
+    Interval:
+      name: interval
+      in: query
+      schema: { type: string, enum: [monthly, quarterly, yearly] }
+      description: Aggregation interval for trend data.
+    StartYear:
+      name: startyear
+      in: query
+      schema: { type: integer }
+      description: First year of the trend window.
+    EndYear:
+      name: endyear
+      in: query
+      schema: { type: integer }
+      description: Last year of the trend window.
+    StartSaleSearchDate:
+      name: startSaleSearchDate
+      in: query
+      schema: { type: string, format: date }
+      description: Start of the sale date range (YYYY-MM-DD).
+    EndSaleSearchDate:
+      name: endSaleSearchDate
+      in: query
+      schema: { type: string, format: date }
+      description: End of the sale date range (YYYY-MM-DD).
+  responses:
+    PropertyResponse:
+      description: A status envelope plus an array of property records.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyResponse'
+    AreaResponse:
+      description: A status envelope plus an array of area, school, community, or POI records.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    BadRequest:
+      description: The request was missing required parameters or was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusEnvelope'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusEnvelope'
+  schemas:
+    Status:
+      type: object
+      description: The status block returned on every ATTOM response.
+      properties:
+        version:
+          type: string
+        code:
+          type: integer
+        msg:
+          type: string
+        total:
+          type: integer
+        page:
+          type: integer
+        pagesize:
+          type: integer
+    StatusEnvelope:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+    Property:
+      type: object
+      description: A property record. ATTOM returns a rich, package-dependent object; key groups are summarized here.
+      properties:
+        identifier:
+          type: object
+          properties:
+            obPropId: { type: string }
+            attomId: { type: integer }
+            fips: { type: string }
+            apn: { type: string }
+        address:
+          type: object
+          properties:
+            line1: { type: string }
+            line2: { type: string }
+            locality: { type: string }
+            countrySubd: { type: string }
+            postal1: { type: string }
+        location:
+          type: object
+          properties:
+            latitude: { type: string }
+            longitude: { type: string }
+            geoIdV4:
+              type: object
+              additionalProperties: { type: string }
+        summary:
+          type: object
+          additionalProperties: true
+        building:
+          type: object
+          additionalProperties: true
+        assessment:
+          type: object
+          additionalProperties: true
+        avm:
+          type: object
+          additionalProperties: true
+        sale:
+          type: object
+          additionalProperties: true
+        mortgage:
+          type: object
+          additionalProperties: true
+        owner:
+          type: object
+          additionalProperties: true
+    PropertyResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        property:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+    GenericResponse:
+      type: object
+      description: Generic envelope for area, school, community, POI, and boundary responses.
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+      additionalProperties: true
