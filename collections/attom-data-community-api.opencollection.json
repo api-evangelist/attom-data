@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Community API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Community",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Community detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/v4/neighborhood/community",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              }
+            ]
+          },
+          "docs": "Community and neighborhood context for a place or geoIdV4 - climate, crime, demographics, natural hazards, education, and commute indicators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

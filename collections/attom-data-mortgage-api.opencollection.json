@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Mortgage API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mortgage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Property detail with mortgage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgage",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Property characteristics plus current mortgage and lender information."
+        },
+        {
+          "info": {
+            "name": "Property detail with mortgage and owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailmortgageowner",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Combined property characteristics, mortgage/lender data, and owner information in a single call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,413 @@
+{
+  "item": [
+    {
+      "id": "ac02d570-598a-4fe6-aa38-32b8fa487b39",
+      "name": "Events",
+      "description": {
+        "content": "Consolidated all-event property history.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c36a0921-82e1-416f-ba1b-de78b5985540",
+          "name": "All events detail",
+          "request": {
+            "name": "All events detail",
+            "description": {
+              "content": "A consolidated view of every event on a property - assessment, AVM, sale, deed, and mortgage - in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "allevents",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address1",
+                  "value": "<string>",
+                  "description": "First line of the street address (house number and street)."
+                },
+                {
+                  "disabled": false,
+                  "key": "address2",
+                  "value": "<string>",
+                  "description": "Second line of the address (city, state)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attomid",
+                  "value": "<string>",
+                  "description": "ATTOM-assigned property identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7b0af72-059a-45fe-8a1f-848d78b5713c",
+              "name": "A status envelope plus an array of property records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "allevents",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 9232,\n    \"msg\": \"string\",\n    \"total\": 4649,\n    \"page\": 9167,\n    \"pagesize\": 4492\n  },\n  \"property\": [\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 6743,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": true\n      },\n      \"building\": {\n        \"key_0\": true\n      },\n      \"assessment\": {\n        \"key_0\": 5092.226186644913,\n        \"key_1\": true\n      },\n      \"avm\": {\n        \"key_0\": 1437.0502495943215,\n        \"key_1\": 1940.068196990331\n      },\n      \"sale\": {\n        \"key_0\": 1283,\n        \"key_1\": 4015.029883103669\n      },\n      \"mortgage\": {\n        \"key_0\": 375,\n        \"key_1\": \"string\",\n        \"key_2\": 3137\n      },\n      \"owner\": {\n        \"key_0\": 2706\n      }\n    },\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 8568,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": \"string\",\n        \"key_1\": 1940.7544749760252\n      },\n      \"building\": {\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": 7329.359684101137\n      },\n      \"assessment\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"avm\": {\n        \"key_0\": 5881,\n        \"key_1\": true\n      },\n      \"sale\": {\n        \"key_0\": 720.8255704575483\n      },\n      \"mortgage\": {\n        \"key_0\": 3269.20033656927,\n        \"key_1\": 1981.177735167724\n      },\n      \"owner\": {\n        \"key_0\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b6a58fe-482a-4485-ad5a-e88cb19d7488",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "allevents",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 8929,\n    \"msg\": \"string\",\n    \"total\": 4831,\n    \"page\": 4377,\n    \"pagesize\": 6794\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "127808c9-8b7d-4844-bacd-078b3899f765",
+          "name": "All events snapshot",
+          "request": {
+            "name": "All events snapshot",
+            "description": {
+              "content": "Summary of property events for properties in an area.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "allevents",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "postalcode",
+                  "value": "<string>",
+                  "description": "5-digit ZIP / postal code to scope the search."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "5",
+                  "description": "Search radius in miles (default 5, maximum 20)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08debab3-0793-4bd9-bb57-bd51dd1bb02f",
+              "name": "A status envelope plus an array of property records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "allevents",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "postalcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 793,\n    \"msg\": \"string\",\n    \"total\": 460,\n    \"page\": 8665,\n    \"pagesize\": 3865\n  },\n  \"property\": [\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 5447,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": 523.0240186637502,\n        \"key_1\": false\n      },\n      \"building\": {\n        \"key_0\": 4561.287907190871,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"assessment\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"avm\": {\n        \"key_0\": 1934.3115178740566\n      },\n      \"sale\": {\n        \"key_0\": \"string\",\n        \"key_1\": 1708\n      },\n      \"mortgage\": {\n        \"key_0\": 5936,\n        \"key_1\": false,\n        \"key_2\": false\n      },\n      \"owner\": {\n        \"key_0\": 6141.081414165048,\n        \"key_1\": 7592.7105691087945\n      }\n    },\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 5000,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": 7547\n      },\n      \"building\": {\n        \"key_0\": true\n      },\n      \"assessment\": {\n        \"key_0\": 6222,\n        \"key_1\": \"string\",\n        \"key_2\": false,\n        \"key_3\": \"string\"\n      },\n      \"avm\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": true\n      },\n      \"sale\": {\n        \"key_0\": 8378,\n        \"key_1\": \"string\"\n      },\n      \"mortgage\": {\n        \"key_0\": 8233.708628504908\n      },\n      \"owner\": {\n        \"key_0\": 7544,\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a14cb389-f433-458b-89e3-a659449b2184",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "allevents",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "postalcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 8929,\n    \"msg\": \"string\",\n    \"total\": 4831,\n    \"page\": 4377,\n    \"pagesize\": 6794\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gateway.attomdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0c7cda2a-a8b2-43f0-8709-3e8f7ba6638c",
+    "name": "ATTOM Area Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.\nEvery request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.\nEndpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM's published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM's documented resource groups; confirm exact query parameters against the live docs.\n\nContact Support:\n Name: ATTOM Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

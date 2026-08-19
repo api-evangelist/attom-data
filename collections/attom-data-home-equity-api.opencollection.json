@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Home Equity API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Home Equity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Home equity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/valuation/homeequity",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Estimated home equity for a property, combining the AVM value with outstanding mortgage balances to return an estimated equity position and loan-to-value indication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

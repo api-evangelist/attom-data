@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Assessment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assessment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assessment detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/detail",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "County assessment data - assessed and market values, tax amounts, and exemptions - for a property."
+        },
+        {
+          "info": {
+            "name": "Assessment snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessment/snapshot",
+            "params": [
+              {
+                "name": "postalcode",
+                "value": "",
+                "type": "query",
+                "description": "5-digit ZIP / postal code to scope the search."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default 5, maximum 20)."
+              }
+            ]
+          },
+          "docs": "Assessment summary for properties in an area matching value or characteristic filters."
+        },
+        {
+          "info": {
+            "name": "Assessment history detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/assessmenthistory/detail",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Historical assessment records for a property."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

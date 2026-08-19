@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area School API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "School",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Property detail with schools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detailwithschools",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Property characteristics plus the school attendance zones and schools serving the property."
+        },
+        {
+          "info": {
+            "name": "School search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/search",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default 5, maximum 20)."
+              }
+            ]
+          },
+          "docs": "Search for schools within a radius of coordinates or within a school attendance area / geoIdV4."
+        },
+        {
+          "info": {
+            "name": "School profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/profile",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              }
+            ]
+          },
+          "docs": "Profile for an individual school - grades, enrollment, ratings, and location."
+        },
+        {
+          "info": {
+            "name": "School district",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/school/district",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              }
+            ]
+          },
+          "docs": "Information about a school district, including boundaries and enrollment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

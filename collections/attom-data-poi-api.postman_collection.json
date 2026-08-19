@@ -1,0 +1,396 @@
+{
+  "item": [
+    {
+      "id": "33bc4c10-ce73-45f7-89af-dce5f2507481",
+      "name": "POI",
+      "description": {
+        "content": "Points of interest (v4).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0577b248-f8a5-4714-bdcb-747fb8742810",
+          "name": "POI search",
+          "request": {
+            "name": "POI search",
+            "description": {
+              "content": "Points-of-interest search returning nearby businesses and amenities within a radius of coordinates or an address. Modeled from ATTOM's POI API v4.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "neighborhood",
+                "poi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Full one-line street address (e.g. \"4529 Winona Court, Denver, CO\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "5",
+                  "description": "Search radius in miles (default 5, maximum 20)."
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryName",
+                  "value": "<string>",
+                  "description": "One or more POI category names to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "recordLimit",
+                  "value": "20",
+                  "description": "Maximum number of POI records to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfbb3213-acde-4732-8b1d-a6aff9e62535",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "neighborhood",
+                    "poi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    },
+                    {
+                      "key": "categoryName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recordLimit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 9082,\n    \"msg\": \"string\",\n    \"total\": 3094,\n    \"page\": 401,\n    \"pagesize\": 4630\n  },\n  \"key_0\": 4885.52361196629\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "969a033d-d650-461c-8170-71cfc44e483b",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "neighborhood",
+                    "poi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    },
+                    {
+                      "key": "categoryName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recordLimit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 9990,\n    \"msg\": \"string\",\n    \"total\": 9929,\n    \"page\": 2378,\n    \"pagesize\": 8762\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3abcd02a-f9a4-4d4d-bc81-7e928485bb21",
+          "name": "POI category lookup",
+          "request": {
+            "name": "POI category lookup",
+            "description": {
+              "content": "Returns the supported POI business categories. Modeled from ATTOM's POI API v4.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "neighborhood",
+                "poi",
+                "category",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd4010ff-9833-40c0-a466-e4f288ccd1cd",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "neighborhood",
+                    "poi",
+                    "category",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 9082,\n    \"msg\": \"string\",\n    \"total\": 3094,\n    \"page\": 401,\n    \"pagesize\": 4630\n  },\n  \"key_0\": 4885.52361196629\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "076b49fa-acc5-48fe-88f7-f2732cf65e2b",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "neighborhood",
+                    "poi",
+                    "category",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 9990,\n    \"msg\": \"string\",\n    \"total\": 9929,\n    \"page\": 2378,\n    \"pagesize\": 8762\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gateway.attomdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c108e4b8-9075-4634-a551-4f36a9220680",
+    "name": "ATTOM Area POI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.\nEvery request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.\nEndpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM's published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM's documented resource groups; confirm exact query parameters against the live docs.\n\nContact Support:\n Name: ATTOM Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

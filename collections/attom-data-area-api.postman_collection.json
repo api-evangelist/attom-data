@@ -1,0 +1,518 @@
+{
+  "item": [
+    {
+      "id": "aa2ec415-e4ec-45a7-9d01-c210c69ec001",
+      "name": "Area",
+      "description": {
+        "content": "Area geography, geoId lookups, and boundaries (v2/v4).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3e5aae1-60ce-4781-8e58-c7650a4e717d",
+          "name": "Area geography lookup",
+          "request": {
+            "name": "Area geography lookup",
+            "description": {
+              "content": "Returns a list of areas (with geoId / geoIdV4 codes) matching an area name and geography type (county, place, neighborhood, school district, ZIP code tabulation area, and others). Modeled from ATTOM's Area API v2/v4 lookups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "areaapi",
+                "v2.0.0",
+                "geography",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Area name to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "geographyTypeAbbreviation",
+                  "value": "<string>",
+                  "description": "Geography type code (e.g. CO, PL, N2, DB, ZI)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f67bac2a-73f8-4eed-bc5f-c00dac40d9a6",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "geography",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geographyTypeAbbreviation",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 2030,\n    \"msg\": \"string\",\n    \"total\": 2269,\n    \"page\": 9743,\n    \"pagesize\": 7114\n  },\n  \"key_0\": 1200,\n  \"key_1\": true,\n  \"key_2\": 5278\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "448e3f10-dea1-47f7-acd2-58744c850c82",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "geography",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geographyTypeAbbreviation",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 8192,\n    \"msg\": \"string\",\n    \"total\": 9721,\n    \"page\": 5898,\n    \"pagesize\": 5702\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa381bcb-83e7-4d8b-b08f-ee239974c9bf",
+          "name": "Area hierarchy lookup",
+          "request": {
+            "name": "Area hierarchy lookup",
+            "description": {
+              "content": "Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "areaapi",
+                "v2.0.0",
+                "hierarchy",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoIdV4",
+                  "value": "<string>",
+                  "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bebd6ba-02a1-4cac-a671-b016c4141a95",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "hierarchy",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 2030,\n    \"msg\": \"string\",\n    \"total\": 2269,\n    \"page\": 9743,\n    \"pagesize\": 7114\n  },\n  \"key_0\": 1200,\n  \"key_1\": true,\n  \"key_2\": 5278\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86478101-ff92-44cc-8339-ab8c9ad01a69",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "hierarchy",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 8192,\n    \"msg\": \"string\",\n    \"total\": 9721,\n    \"page\": 5898,\n    \"pagesize\": 5702\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d63faf59-d9c9-4d07-afc4-02e0cd4f47b0",
+          "name": "Area boundary detail",
+          "request": {
+            "name": "Area boundary detail",
+            "description": {
+              "content": "Returns the boundary geometry for an area in GeoJSON format, for most geographies supported by the geocoding system. Modeled from ATTOM's Area API boundary endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "areaapi",
+                "v2.0.0",
+                "boundary",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoIdV4",
+                  "value": "<string>",
+                  "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Boundary geometry format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccfe06b6-650d-406f-9b08-7a65342da26a",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "boundary",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 2030,\n    \"msg\": \"string\",\n    \"total\": 2269,\n    \"page\": 9743,\n    \"pagesize\": 7114\n  },\n  \"key_0\": 1200,\n  \"key_1\": true,\n  \"key_2\": 5278\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f36abd09-721d-49fa-b647-18bb59cb3cb9",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areaapi",
+                    "v2.0.0",
+                    "boundary",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 8192,\n    \"msg\": \"string\",\n    \"total\": 9721,\n    \"page\": 5898,\n    \"pagesize\": 5702\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gateway.attomdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f09c3304-d30f-4085-a9bd-b28d946d98df",
+    "name": "ATTOM Area API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.\nEvery request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.\nEndpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM's published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM's documented resource groups; confirm exact query parameters against the live docs.\n\nContact Support:\n Name: ATTOM Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

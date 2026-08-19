@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Sales API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sales",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sale detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/detail",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Recorded sale transaction detail for a property."
+        },
+        {
+          "info": {
+            "name": "Sale snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/sale/snapshot",
+            "params": [
+              {
+                "name": "postalcode",
+                "value": "",
+                "type": "query",
+                "description": "5-digit ZIP / postal code to scope the search."
+              },
+              {
+                "name": "startSaleSearchDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the sale date range (YYYY-MM-DD)."
+              },
+              {
+                "name": "endSaleSearchDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the sale date range (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "Sale transactions for properties in an area over a date range."
+        },
+        {
+          "info": {
+            "name": "Sales history detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/detail",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Up to ~10 years of recorded sales history for a property."
+        },
+        {
+          "info": {
+            "name": "Sales history (basic)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/basichistory",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Essential sales history records for a property."
+        },
+        {
+          "info": {
+            "name": "Sales history (expanded)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/saleshistory/expandedhistory",
+            "params": [
+              {
+                "name": "address1",
+                "value": "",
+                "type": "query",
+                "description": "First line of the street address (house number and street)."
+              },
+              {
+                "name": "address2",
+                "value": "",
+                "type": "query",
+                "description": "Second line of the address (city, state)."
+              },
+              {
+                "name": "attomid",
+                "value": "",
+                "type": "query",
+                "description": "ATTOM-assigned property identifier."
+              }
+            ]
+          },
+          "docs": "Extended sales history records, including transaction and mortgage context, for a property."
+        },
+        {
+          "info": {
+            "name": "Sales trend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/propertyapi/v1.0.0/transaction/salestrend",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Aggregation interval for trend data."
+              },
+              {
+                "name": "startyear",
+                "value": "",
+                "type": "query",
+                "description": "First year of the trend window."
+              },
+              {
+                "name": "endyear",
+                "value": "",
+                "type": "query",
+                "description": "Last year of the trend window."
+              }
+            ]
+          },
+          "docs": "Aggregated average/median sale prices and transaction counts for an area over an interval (up to two years)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

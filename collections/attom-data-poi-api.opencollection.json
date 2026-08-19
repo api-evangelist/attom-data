@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area POI API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "POI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POI search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/v4/neighborhood/poi",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Full one-line street address (e.g. \"4529 Winona Court, Denver, CO\")."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default 5, maximum 20)."
+              },
+              {
+                "name": "categoryName",
+                "value": "",
+                "type": "query",
+                "description": "One or more POI category names to filter by."
+              },
+              {
+                "name": "recordLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of POI records to return."
+              }
+            ]
+          },
+          "docs": "Points-of-interest search returning nearby businesses and amenities within a radius of coordinates or an address. Modeled from ATTOM's POI API v4."
+        },
+        {
+          "info": {
+            "name": "POI category lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/v4/neighborhood/poi/category/lookup"
+          },
+          "docs": "Returns the supported POI business categories. Modeled from ATTOM's POI API v4."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

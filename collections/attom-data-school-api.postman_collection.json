@@ -1,0 +1,707 @@
+{
+  "item": [
+    {
+      "id": "0c7ece82-4eb7-435f-ba57-c547063c9f08",
+      "name": "School",
+      "description": {
+        "content": "Schools, school districts, and attendance zones.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "491b78d2-735b-4bf7-a277-9fec76306fbb",
+          "name": "Property detail with schools",
+          "request": {
+            "name": "Property detail with schools",
+            "description": {
+              "content": "Property characteristics plus the school attendance zones and schools serving the property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "property",
+                "detailwithschools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address1",
+                  "value": "<string>",
+                  "description": "First line of the street address (house number and street)."
+                },
+                {
+                  "disabled": false,
+                  "key": "address2",
+                  "value": "<string>",
+                  "description": "Second line of the address (city, state)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attomid",
+                  "value": "<string>",
+                  "description": "ATTOM-assigned property identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bfdfac9-8166-4e61-95a4-fd2fc9bd0588",
+              "name": "A status envelope plus an array of property records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "property",
+                    "detailwithschools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 7833,\n    \"msg\": \"string\",\n    \"total\": 3894,\n    \"page\": 4836,\n    \"pagesize\": 6513\n  },\n  \"property\": [\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 86,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": true\n      },\n      \"building\": {\n        \"key_0\": 6114\n      },\n      \"assessment\": {\n        \"key_0\": \"string\"\n      },\n      \"avm\": {\n        \"key_0\": true,\n        \"key_1\": 4909.529557473481\n      },\n      \"sale\": {\n        \"key_0\": 4850.595143432248,\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      },\n      \"mortgage\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"owner\": {\n        \"key_0\": 488.56726127380676,\n        \"key_1\": 4304.366701865843\n      }\n    },\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 7332,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": 972\n      },\n      \"building\": {\n        \"key_0\": false,\n        \"key_1\": 2534.3945920835586\n      },\n      \"assessment\": {\n        \"key_0\": 1887.9119993431336,\n        \"key_1\": 4208.0425573419125,\n        \"key_2\": true\n      },\n      \"avm\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": 8931.226249557327\n      },\n      \"sale\": {\n        \"key_0\": 6821,\n        \"key_1\": \"string\"\n      },\n      \"mortgage\": {\n        \"key_0\": 8742.941437737398\n      },\n      \"owner\": {\n        \"key_0\": 7438,\n        \"key_1\": \"string\",\n        \"key_2\": true,\n        \"key_3\": 7194.38508252154\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6977ab4-cbec-4b73-aa96-58993f08669b",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "property",
+                    "detailwithschools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 290,\n    \"msg\": \"string\",\n    \"total\": 9982,\n    \"page\": 7295,\n    \"pagesize\": 5700\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd41d003-f423-4fe4-a90b-9e0eb58524ec",
+          "name": "School search",
+          "request": {
+            "name": "School search",
+            "description": {
+              "content": "Search for schools within a radius of coordinates or within a school attendance area / geoIdV4.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "school",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoIdV4",
+                  "value": "<string>",
+                  "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "5",
+                  "description": "Search radius in miles (default 5, maximum 20)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "773fb551-7972-4476-95de-af6dd5ee52f4",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 1509,\n    \"msg\": \"string\",\n    \"total\": 277,\n    \"page\": 1589,\n    \"pagesize\": 1201\n  },\n  \"key_0\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bbf30a6-1f42-47ba-a9e8-e958e71ba021",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 290,\n    \"msg\": \"string\",\n    \"total\": 9982,\n    \"page\": 7295,\n    \"pagesize\": 5700\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66ac3947-fc7f-4305-9ea6-079d9fb69064",
+          "name": "School profile",
+          "request": {
+            "name": "School profile",
+            "description": {
+              "content": "Profile for an individual school - grades, enrollment, ratings, and location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "school",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoIdV4",
+                  "value": "<string>",
+                  "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e599231b-1298-4508-b6e4-99f6d4ce6297",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 1509,\n    \"msg\": \"string\",\n    \"total\": 277,\n    \"page\": 1589,\n    \"pagesize\": 1201\n  },\n  \"key_0\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7d1039e-54ed-4a7b-ad1d-3a1f71122f86",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 290,\n    \"msg\": \"string\",\n    \"total\": 9982,\n    \"page\": 7295,\n    \"pagesize\": 5700\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f2efbc0-491c-4280-8e85-ec1f6c625841",
+          "name": "School district",
+          "request": {
+            "name": "School district",
+            "description": {
+              "content": "Information about a school district, including boundaries and enrollment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "school",
+                "district"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoIdV4",
+                  "value": "<string>",
+                  "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11c8fd86-4203-4ca5-b228-6da124d67934",
+              "name": "A status envelope plus an array of area, school, community, or POI records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "district"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 1509,\n    \"msg\": \"string\",\n    \"total\": 277,\n    \"page\": 1589,\n    \"pagesize\": 1201\n  },\n  \"key_0\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a9714c3-405d-4a59-a3d8-208fc96a0a53",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "school",
+                    "district"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoIdV4",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 290,\n    \"msg\": \"string\",\n    \"total\": 9982,\n    \"page\": 7295,\n    \"pagesize\": 5700\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gateway.attomdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cd371a1b-2ceb-4183-92bb-c744e5449073",
+    "name": "ATTOM Area School API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.\nEvery request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.\nEndpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM's published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM's documented resource groups; confirm exact query parameters against the live docs.\n\nContact Support:\n Name: ATTOM Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

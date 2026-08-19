@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "728a7267-4bd4-4ba8-a64d-e65cb7e70770",
+      "name": "Home Equity",
+      "description": {
+        "content": "Estimated home equity and loan-to-value.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3bd1c7ce-1c65-479c-9cb5-432cfc66ed33",
+          "name": "Home equity",
+          "request": {
+            "name": "Home equity",
+            "description": {
+              "content": "Estimated home equity for a property, combining the AVM value with outstanding mortgage balances to return an estimated equity position and loan-to-value indication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "propertyapi",
+                "v1.0.0",
+                "valuation",
+                "homeequity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address1",
+                  "value": "<string>",
+                  "description": "First line of the street address (house number and street)."
+                },
+                {
+                  "disabled": false,
+                  "key": "address2",
+                  "value": "<string>",
+                  "description": "Second line of the address (city, state)."
+                },
+                {
+                  "disabled": false,
+                  "key": "attomid",
+                  "value": "<string>",
+                  "description": "ATTOM-assigned property identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6db58d6-3933-41de-b567-60a5e85760fe",
+              "name": "A status envelope plus an array of property records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "valuation",
+                    "homeequity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 7366,\n    \"msg\": \"string\",\n    \"total\": 278,\n    \"page\": 3463,\n    \"pagesize\": 2246\n  },\n  \"property\": [\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 6503,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": true,\n        \"key_1\": 2563.7710658079695,\n        \"key_2\": \"string\"\n      },\n      \"building\": {\n        \"key_0\": 7955.615889405152\n      },\n      \"assessment\": {\n        \"key_0\": 907.9050193982074\n      },\n      \"avm\": {\n        \"key_0\": 1641.2020581539477,\n        \"key_1\": 2480\n      },\n      \"sale\": {\n        \"key_0\": 9469,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"mortgage\": {\n        \"key_0\": 7448.050310461345,\n        \"key_1\": 7208.618951035949,\n        \"key_2\": 7951.583687075272\n      },\n      \"owner\": {\n        \"key_0\": 1468,\n        \"key_1\": 2396\n      }\n    },\n    {\n      \"identifier\": {\n        \"obPropId\": \"string\",\n        \"attomId\": 4492,\n        \"fips\": \"string\",\n        \"apn\": \"string\"\n      },\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"countrySubd\": \"string\",\n        \"postal1\": \"string\"\n      },\n      \"location\": {\n        \"latitude\": \"string\",\n        \"longitude\": \"string\",\n        \"geoIdV4\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"summary\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"building\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"assessment\": {\n        \"key_0\": 1928\n      },\n      \"avm\": {\n        \"key_0\": 681\n      },\n      \"sale\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      },\n      \"mortgage\": {\n        \"key_0\": 1952.234278460776,\n        \"key_1\": 542.39619634324\n      },\n      \"owner\": {\n        \"key_0\": 2928.823507810752\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a84c31b0-12cd-4326-8445-2ead454373f0",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "propertyapi",
+                    "v1.0.0",
+                    "valuation",
+                    "homeequity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attomid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"version\": \"string\",\n    \"code\": 217,\n    \"msg\": \"string\",\n    \"total\": 3369,\n    \"page\": 616,\n    \"pagesize\": 6272\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gateway.attomdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6373d2e4-5480-4041-a1da-6d773d4318f5",
+    "name": "ATTOM Area Home Equity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ATTOM API (delivered as ATTOM Cloud) provides REST access to ATTOM Data Solutions' national warehouse of property, real estate, and location data covering 158+ million U.S. properties. Resources are queried by address, APN + FIPS, ATTOM ID, radius around coordinates, or geoIdV4, and cover property characteristics, tax assessments, automated valuations (AVM), sales and deed history, mortgage records, area and boundary geographies, schools, community/neighborhood data, points of interest, transportation noise, consolidated all-event history, and home equity.\nEvery request requires an API key passed in the `apikey` header. The URI pattern for the classic Property API is `{base}/propertyapi/v1.0.0/{resource}/{package}?{query}`; version 4 (v4) endpoints drop the component name and use a simplified `{base}/v4/{resource}` form. Area geography endpoints live under `areaapi/v2.0.0`.\nEndpoints under `propertyapi/v1.0.0` (property, assessment, avm, sale, saleshistory, salestrend, school, allevents, valuation) are grounded in ATTOM's published endpoint reference. The v4 community, POI, area/boundary, and transportation-noise operations are modeled from ATTOM's documented resource groups; confirm exact query parameters against the live docs.\n\nContact Support:\n Name: ATTOM Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

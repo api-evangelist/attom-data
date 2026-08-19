@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area Transportation Noise API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transportation Noise",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Transportation noise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/transportationnoise",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Full one-line street address (e.g. \"4529 Winona Court, Denver, CO\")."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              }
+            ]
+          },
+          "docs": "Modeled transportation-noise scores for a location, estimating noise exposure from road, rail, and air traffic. Modeled from ATTOM's transportation-noise resource; confirm the exact path and parameters against the live documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

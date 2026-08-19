@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ATTOM Area API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Area",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Area geography lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/geography/lookup",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Area name to search for."
+              },
+              {
+                "name": "geographyTypeAbbreviation",
+                "value": "",
+                "type": "query",
+                "description": "Geography type code (e.g. CO, PL, N2, DB, ZI)."
+              }
+            ]
+          },
+          "docs": "Returns a list of areas (with geoId / geoIdV4 codes) matching an area name and geography type (county, place, neighborhood, school district, ZIP code tabulation area, and others). Modeled from ATTOM's Area API v2/v4 lookups."
+        },
+        {
+          "info": {
+            "name": "Area hierarchy lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/hierarchy/lookup",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              }
+            ]
+          },
+          "docs": "Returns the hierarchy of parent/child areas for a given geoIdV4. Modeled from ATTOM's Area API."
+        },
+        {
+          "info": {
+            "name": "Area boundary detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gateway.attomdata.com/areaapi/v2.0.0/boundary/detail",
+            "params": [
+              {
+                "name": "geoIdV4",
+                "value": "",
+                "type": "query",
+                "description": "32-character geoIdV4 area identifier (required by v4-and-above endpoints)."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Boundary geometry format."
+              }
+            ]
+          },
+          "docs": "Returns the boundary geometry for an area in GeoJSON format, for most geographies supported by the geocoding system. Modeled from ATTOM's Area API boundary endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
