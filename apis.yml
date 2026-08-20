@@ -26,6 +26,15 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/attom-data.png
 tags:
 - Property Data
+- Real-Estate
+- Location Data
+- Valuation
+- AVM
+- Assessment
+- Mortgage
+- Neighborhood
+tags_raw:
+- Property Data
 - Real Estate
 - Location Data
 - Valuation
@@ -109,6 +118,8 @@ apis:
   humanURL: https://api.developer.attomdata.com/docs
   baseURL: https://api.gateway.attomdata.com/propertyapi/v1.0.0
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
