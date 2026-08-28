@@ -10,6 +10,18 @@ description: ATTOM Data Solutions is a national property, real estate, and locat
   boundary geographies, schools, community and neighborhood data, points of interest,
   transportation noise, all-event snapshots, and home equity - queried by address,
   APN/FIPS, ATTOM ID, radius, or geoIdV4 and authenticated with an API key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
