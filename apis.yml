@@ -325,6 +325,9 @@ apis:
   - type: Documentation
     url: https://cloud-help.attomdata.com/article/641-upgrading-to-poi-endpoint-v4
 common:
+- type: CapabilityMap
+  url: capabilities/attom-data-capability-edges.yml
+  name: ATTOM Business Capability Map
 - type: AgenticAccess
   url: agentic-access/attom-data-agentic-access.yml
 - type: DomainSecurity

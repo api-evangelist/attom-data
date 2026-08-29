@@ -1,0 +1,36 @@
+slug: attom-data
+provider: ATTOM
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Real Estate
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Valuation
+  spec_file: attom-data-valuation-api-openapi.yml
+  capability_id: BC-4970
+  capability_id_l1: BC-4970
+  capability_name: Real Estate Valuation & Appraisal Management
+  confidence: 0.8
+  evidence: '''attomavm/detail  ATTOM AVM detail''; ''avmhistory/detail  AVM history detail''; ''valuation/rentalavm  Rental
+    AVM'''
+  reason: Automated valuation model outputs, AVM history and rental AVM are the production of property
+    value estimates — real-estate valuation. Which sub-capability (approach application vs. mark-to-market)
+    the model output belongs to is not determinable, so only the L1 is asserted.
+- tag: Sales
+  spec_file: attom-data-sales-api-openapi.yml
+  capability_id: BC-4970.30
+  capability_id_l1: BC-4970
+  capability_name: Market Data & Comparable Curation
+  confidence: 0.7
+  evidence: '''saleshistory/detail  Sales history detail''; ''transaction/salestrend  Sales trend'''
+  reason: Sale detail, sales history and sales-trend endpoints deliver comparable transaction records
+    and market trend indices — squarely the sourcing/curation of comparables and market indices that underpins
+    valuation and pricing analysis.
